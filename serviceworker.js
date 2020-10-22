@@ -137,6 +137,7 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
     let request = event.request;
+    //Cache First..
     // Look in the cache first, fall back to the network
     event.respondWith(
         // CACHE
@@ -144,19 +145,19 @@ self.addEventListener('fetch', event => {
         .then( responseFromCache => {
             // Did we find the file in the cache?
             if (responseFromCache) {
-                // If so, fetch a fresh copy from the network in the background
-                // (using the async waitUntil polyfill)
-                event.waitUntil(
-                    // NETWORK
-                    fetch(request)
-                    .then( responseFromFetch => {
-                        // Stash the fresh copy in the cache
-                        caches.open(staticCacheName)
-                        .then( cache => {
-                            cache.put(request, responseFromFetch);
-                        });
-                    })
-                );
+//                 // If so, fetch a fresh copy from the network in the background
+//                 // (using the async waitUntil polyfill)
+//                 event.waitUntil(
+//                     // NETWORK
+//                     fetch(request)
+//                     .then( responseFromFetch => {
+//                         // Stash the fresh copy in the cache
+//                         caches.open(staticCacheName)
+//                         .then( cache => {
+//                             cache.put(request, responseFromFetch);
+//                         });
+//                     })
+//                 );
                 return responseFromCache
             }
             // NETWORK
