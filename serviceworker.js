@@ -141,7 +141,7 @@ self.addEventListener('fetch', event => {
     // Look in the network first, fall back to the cache
     event.respondWith(
         // NW
-        return fetch(request)
+        fetch(request)
         .then( responseFromFetch => {
             if (responseFromFetch) {
                 let responseCopy = responseFromFetch.clone();
